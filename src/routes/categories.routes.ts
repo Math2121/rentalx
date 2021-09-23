@@ -8,7 +8,7 @@ const upload = multer({
 })
 const categoriesRoutes = Router();
 categoriesRoutes.post("/", (req, res) => {
-  console.log("sssssss")
+
   return createCategoryController.handle(req, res);
 });
 
@@ -20,3 +20,4 @@ categoriesRoutes.post("/import",upload.single("file"),(req, res) => {
 return importCategoryController.handle(req,res)
 })
 export { categoriesRoutes };
+    
