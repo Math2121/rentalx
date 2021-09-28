@@ -2,9 +2,13 @@ import { createConnection } from "typeorm";
 
 createConnection({
   type: "postgres",
+  host: "database",
   port: 5432,
-  host: "localhost",
   username: "docker",
   password: "ignite",
   database: "rentx",
+  migrations: ["./src/database/migrations/*.ts"],
+  cli: {
+    migrationsDir: "./src/database/migrations",
+  },
 });
