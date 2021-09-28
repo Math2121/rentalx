@@ -7,8 +7,4 @@ createConnection({
   username: "docker",
   password: "ignite",
   database: "rentx",
-  migrations: ["./src/database/migrations/*.ts"],
-  cli: {
-    migrationsDir: "./src/database/migrations",
-  },
 });
