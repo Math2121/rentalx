@@ -3,6 +3,8 @@ import {Column, CreateDateColumn, Entity, PrimaryColumn} from "typeorm"
 
 @Entity("Categories")
 class Category {
+  @PrimaryColumn()
+  id?: string;
   @Column()
   name: string;
   @Column()
@@ -10,8 +12,7 @@ class Category {
   @CreateDateColumn()
   created_at: Date;
 
-  @PrimaryColumn()
-  id?: string;
+ 
 
   constructor() {
       if(!this.id){
