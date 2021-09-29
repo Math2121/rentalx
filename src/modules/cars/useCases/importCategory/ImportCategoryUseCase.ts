@@ -11,7 +11,7 @@ interface IImportCategory {
 class ImportCategoryUseCase {
   constructor(
     @inject("CategoriesRepository")
-    private catgeoriesRepository: ICategoriesRepository) {}
+    private categoriesRepository: ICategoriesRepository) {}
   loadCategories(file: Express.Multer.File): Promise<IImportCategory[]> {
     return new Promise((resolve, reject) => {
       const stream = fs.createReadStream(file.path);
@@ -42,10 +42,10 @@ class ImportCategoryUseCase {
     categories.map(async (category) => {
       const { name, description } = category;
 
-      const existCategory = this.catgeoriesRepository.findByName(name);
+      const existCategory = await this.categoriesRepository.findByName(name);
 
       if (!existCategory) {
-        this.catgeoriesRepository.create({ name, description });
+        await this.categoriesRepository.create({ name, description });
       }
     });
   }
