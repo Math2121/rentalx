@@ -73,22 +73,28 @@
         }
       }
     },
-    "/catgeories/import":{
-      "post":{
-        "tags":["Category"],
-        "summary":"Upload a new Category",
-        "requestBody":{
-          "content":{
-            "application/octet-stream":{
+    "/catgeories/import": {
+      "post": {
+        "tags": ["Category"],
+        "summary": "Upload a new Category",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
               "schema": {
-                "type":"string"
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
               }
             }
           }
         },
-        "reponses":{
-          "201":{
-            "description":"Created"
+        "reponses": {
+          "201": {
+            "description": "Created"
           }
         }
       }
@@ -107,12 +113,12 @@
             }
           }
         },
-        "responses":{
-          "201":{
-            "description":"Created"
+        "responses": {
+          "201": {
+            "description": "Created"
           },
-          "500":{
-            "description":"Specification already exists"
+          "500": {
+            "description": "Specification already exists"
           }
         }
       }
