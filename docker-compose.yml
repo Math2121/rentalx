@@ -4,8 +4,10 @@ services:
   app:
     build: .
     container_name: rentx
+    restart: always
     volumes:
       - .:/usr/app
+      - /usr/app/node_modules/
     depends_on:
       - database
     networks:
