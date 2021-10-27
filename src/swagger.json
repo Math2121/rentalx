@@ -73,7 +73,7 @@
         }
       }
     },
-    "/catgeories/import": {
+    "/categories/import": {
       "post": {
         "tags": ["Category"],
         "summary": "Upload a new Category",
