@@ -13,7 +13,7 @@ export async function ensureAuthenticate(
   //retorna o token no header da requisição
   const authHeader = request.headers.authorization;
   if (!authHeader) {
-    throw new AppError("Token missing",401);
+    throw new AppError("Token missing", 401);
   }
   const [, token] = authHeader.split(" ");
   try {
@@ -26,10 +26,11 @@ export async function ensureAuthenticate(
     const usersRepository = new UserRepository();
     const user = usersRepository.findById(user_id);
     if (!user) {
-      throw new AppError("Use does not exists!",401);
+      throw new AppError("Use does not exists!", 401);
     }
+    request.user = { id: user_id };
     next();
   } catch (error) {
-    throw new AppError("Invalid Token",401);
+    throw new AppError("Invalid Token", 401);
   }
 }
