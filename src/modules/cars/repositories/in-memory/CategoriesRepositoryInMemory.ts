@@ -1,3 +1,4 @@
+import { getRepository } from "typeorm";
 import { Category } from "../../entities/Category";
 import {
   ICategoriesRepository,
@@ -5,14 +6,14 @@ import {
 } from "../ICategoriesRepository";
 
 class CategoriesRepositoryInMemory implements ICategoriesRepository {
-  categories: Category[] = [];
+  private repository: Category[] = [];
 
   async findByName(name: string): Promise<Category> {
-    const category = this.categories.find((category) => category.name === name);
+    const category = this.repository.find((category) => category.name === name);
     return category;
   }
   async list(): Promise<Category[]> {
-    const all = this.categories;
+    const all = this.repository;
     return all;
   }
   async create({ name, description }: ICreateCategoryDTO): Promise<void> {
@@ -22,7 +23,7 @@ class CategoriesRepositoryInMemory implements ICategoriesRepository {
       name,
       description,
     });
-    this.categories.push(category);
+    this.repository.push(category);
   }
 }
 export { CategoriesRepositoryInMemory };

@@ -43,14 +43,14 @@ class AuthenticatedUseCase {
       subject: user.id,
       expiresIn: "1d",
     });
-    const tokernReturn: IResponse = {
+    const tokenReturn: IResponse = {
       token,
       user: {
         name: user.name,
         email: user.email,
       },
     };
-    return tokernReturn;
+    return tokenReturn;
   }
 }
 

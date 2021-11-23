@@ -1,4 +1,4 @@
-import { ICreateUserDTO } from "@modules/dtos/ICreateUserDTO";
+import { ICreateUserDTO } from "../../../../modules/dtos/ICreateUserDTO";
 import { inject, injectable } from "tsyringe";
 import { IUserRepository } from "../../repositories/IUsersRepository";
 import {hash} from 'bcrypt'
