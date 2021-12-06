@@ -1,6 +1,6 @@
 import { AppError } from "@errors/AppError";
 import { ICreateUserDTO } from "@modules/dtos/ICreateUserDTO";
-import { UsersRepositoryInMemory } from "../../repositories/in-memory/UsersRepositoryInMemory";
+import { UsersRepositoryInMemory } from "@modules/accounts/repositories/in-memory/UsersRepositoryInMemory";
 import { CreateUserUseCase } from "../createUser/CreateUserUseCase";
 import { AuthenticatedUseCase } from "./authenticatedUseCase";
 
@@ -30,7 +30,7 @@ describe("Authenticate User", () => {
     expect(result).toHaveProperty("token");
   });
 
-  it("should not be able to athenticate an nonexistent user", async () => {
+  it("should not be able to athenticate an nonexistent user",() => {
     expect(async () => {
       await authenticateUserUseCase.execute({
         email: "false@gmail.com",
@@ -39,7 +39,7 @@ describe("Authenticate User", () => {
     }).rejects.toBeInstanceOf(AppError);
   });
 
-  it("should not be able to athenticate with incorrect password", async () => {
+  it("should not be able to athenticate with incorrect password",() => {
     expect(async () => {
       const user: ICreateUserDTO = {
         driver_license: "9999",

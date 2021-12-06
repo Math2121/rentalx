@@ -8,7 +8,6 @@ class CreateUserUseCase {
   constructor(@inject("UserRepository") private userRepository: IUserRepository) {}
   async create({
     name,
-
     email,
     password,
     driver_license,

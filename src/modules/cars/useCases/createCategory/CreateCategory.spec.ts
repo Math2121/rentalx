@@ -1,5 +1,5 @@
-import { AppError } from "../../../../errors/AppError";
-import { CategoriesRepositoryInMemory } from "../../repositories/in-memory/CategoriesRepositoryInMemory";
+import { AppError } from "@errors/AppError";
+import { CategoriesRepositoryInMemory } from "@modules/cars/repositories/in-memory/CategoriesRepositoryInMemory";
 import { CreateCategoryUseCase } from "./CreateCategoryUseCase";
 let createCategoryUseCase: CreateCategoryUseCase;
 let categoriesRepositoryInMemory: CategoriesRepositoryInMemory;
@@ -27,7 +27,7 @@ describe("Create Category", () => {
     expect(categoryExists).toHaveProperty("id");
   });
 
-  it("Should not be able to create a new category with same name", async () => {
+  it("Should not be able to create a new category with same name",() => {
     expect(async()=>{
       const category = {
         name: "Category Test",
