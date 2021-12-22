@@ -20,16 +20,15 @@ ____________________________
 **RN**
 
 [X] Não deve ser possivel cadastrar um novo carro com license_plate já existente.
-[] Não deve ser possivel alterar a placa de um carro já cadastrado.
-[] O carro deve ser cadastrado, por padrão com Disponibilidade (Available)
-[] Não deve ser possivel cadastrar um carro se o usuário não for admin
+[x] O carro deve ser cadastrado, por padrão com Disponibilidade (Available)
+[x] Não deve ser possivel cadastrar um carro se o usuário não for admin*
 
 # Listagem de Carros
 
 **RF**
-[] Deve ser possivel listar todos os carros disponiveis
+[X] Deve ser possivel listar todos os carros disponiveis
 [] Deve ser possivel listar todos os carros disponiveis pelo nome da categoria
-[] Deve ser possivel listar todos os carros disponiveis pelo nome da marca
+[x] Deve ser possivel listar todos os carros disponiveis pelo nome da marca
 
 **RN**
 [] O usuário não precisa estar logado no sistema.
