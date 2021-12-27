@@ -9,7 +9,7 @@ class CarsRepository implements ICarsRepository {
   constructor() {
     this.repository = getRepository(Car);
   }
- 
+
   async create({
     name,
     license_plate,
@@ -37,8 +37,30 @@ class CarsRepository implements ICarsRepository {
 
     return car;
   }
-  findAllAvailable(brand?: string, category_id?: string, name?: string): Promise<Car[]> {
-    throw new Error("Method not implemented.");
+  async findAllAvailable(
+    brand?: string,
+    category_id?: string,
+    name?: string
+  ): Promise<Car[]> {
+    const carsQuery = await this.repository
+      .createQueryBuilder("cars")
+      .where("available = :available", { available: true });
+
+    if (brand) {
+      carsQuery.andWhere("cas.brand = :brand", { brand });
+    }
+
+    if (category_id) {
+      carsQuery.andWhere("cas.category_id = :category_id", { category_id });
+    }
+
+    if (name) {
+      carsQuery.andWhere("cas.name = :name", { name });
+    }
+
+    const cars = await carsQuery.getMany();
+
+    return cars;
   }
 }
 

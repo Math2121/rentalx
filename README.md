@@ -27,7 +27,7 @@ ____________________________
 
 **RF**
 [X] Deve ser possivel listar todos os carros disponiveis
-[] Deve ser possivel listar todos os carros disponiveis pelo nome da categoria
+[x] Deve ser possivel listar todos os carros disponiveis pelo nome da categoria
 [x] Deve ser possivel listar todos os carros disponiveis pelo nome da marca
 
 **RN**
