@@ -1,86 +1,67 @@
+
+import { ICreateCarDTO } from "@modules/cars/dtos/ICreateCarsDTO";
 import { CarsRepositoryInMemory } from "@modules/cars/repositories/in-memory/CarsRepositoryInMemory";
 import { AppError } from "@shared/errors/AppError";
+
 import { CreateCarUseCase } from "./CreateCarUseCase";
 
 let createCarUseCase: CreateCarUseCase;
-let carsRepository: CarsRepositoryInMemory;
+let carsRepositoryInMemory: CarsRepositoryInMemory;
+
 describe("Create Car", () => {
-  beforeEach(() => {
-    carsRepository = new CarsRepositoryInMemory();
-    createCarUseCase = new CreateCarUseCase(carsRepository);
-  });
-  it("should be able create a new car", async () => {
-    const car = await createCarUseCase.execute({
-      name: "Name Car",
-      description: "Car Test",
-      daily_rate: 100,
-      license_plate: "ABC-DEF",
-      brand: "Brand",
-      category_id: "dfdf",
-      fine_amount: 60,
-    });
-    expect(car).toHaveProperty("id")
-  });
-
-  it("should not to be able create a car with exists license_palte", () => {
-    expect(async () => {
-      await createCarUseCase.execute({
-        name: "Name Car",
-        description: "Car Test",
-        daily_rate: 100,
-        license_plate: "ABC-DEF",
-        brand: "Brand",
-        category_id: "dfdf",
-        fine_amount: 60,
-      });
-
-      await createCarUseCase.execute({
-        name: "Name Car",
-        description: "Car Test",
-        daily_rate: 100,
-        license_plate: "ABC-DEF",
-        brand: "Brand",
-        category_id: "dfdf",
-        fine_amount: 60,
-      });
-    }).rejects.toBeInstanceOf(AppError);
-  });
-
-  it("should not to be able create a car with exists license_palte", () => {
-    expect(async () => {
-      await createCarUseCase.execute({
-        name: "Name Car",
-        description: "Car Test",
-        daily_rate: 100,
-        license_plate: "ABC-DEF",
-        brand: "Brand",
-        category_id: "dfdf",
-        fine_amount: 60,
-      });
-
-      await createCarUseCase.execute({
-        name: "Name Car",
-        description: "Car Test",
-        daily_rate: 100,
-        license_plate: "ABC-DEF",
-        brand: "Brand",
-        category_id: "dfdf",
-        fine_amount: 60,
-      });
-    }).rejects.toBeInstanceOf(AppError);
-  });
-
-  it("should not  be able create a car with available not tru by default", async () => {
-    const car = await createCarUseCase.execute({
-      name: "Name Car",
-      description: "Car Test",
-      daily_rate: 100,
-      license_plate: "ABC-DEF",
-      brand: "Brand",
-      category_id: "dfdf",
-      fine_amount: 60,
+    beforeEach(() => {
+        carsRepositoryInMemory = new CarsRepositoryInMemory();
+        createCarUseCase = new CreateCarUseCase(carsRepositoryInMemory);
     });
 
-    expect(car.available).toBe(true);
-  });
+    it("Should be able to create a new Car", async () => {
+        const car = await createCarUseCase.execute({
+            name: "Car Name",
+            description: "Description Car",
+            daily_rate: 100,
+            license_plate: "idk2",
+            brand: "Car Brand",
+            fine_amount: 60,
+            category_id: "category",
+        } as ICreateCarDTO);
+        expect(car).toHaveProperty("id");
+    });
+
+    it("should not be able to create a car with an existing license_plate", async () => {
+        await createCarUseCase.execute({
+            name: "Car1 Name",
+            description: "Description Car",
+            daily_rate: 100,
+            license_plate: "ABC123",
+            brand: "Car Brand",
+            fine_amount: 60,
+            category_id: "category",
+        } as ICreateCarDTO);
+
+        expect(async () => {
+            await createCarUseCase.execute({
+                name: "Car2 Name",
+                description: "Description Car",
+                license_plate: "ABC123",
+                daily_rate: 100,
+                brand: "Car Brand",
+                fine_amount: 60,
+                category_id: "category",
+            } as ICreateCarDTO);
+        }).rejects.toEqual(new AppError("Car Already Exists"));
+    });
+
+    it("Should be able to create a car with available true by default", async () => {
+        const car = await createCarUseCase.execute({
+            name: "Car Available",
+            description: "Description Car",
+            daily_rate: 100,
+            license_plate: "XYZ",
+            brand: "Car Brand",
+            fine_amount: 60,
+            category_id: "category",
+        } as ICreateCarDTO);
+
+        expect(car.available).toBe(true);
+    });
 });

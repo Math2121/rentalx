@@ -31,19 +31,19 @@ ____________________________
 [x] Deve ser possivel listar todos os carros disponiveis pelo nome da marca
 
 **RN**
-[] O usuário não precisa estar logado no sistema.
+[x] O usuário não precisa estar logado no sistema.
 ____________________________
 
 # Cadastro de Especificação no carro (Specifications_Cars)
 **RF**
 
-[] Deve ser possivel cadastrar uma especificação para um carro;
+[x] Deve ser possivel cadastrar uma especificação para um carro;
 
 **RN**
 
-[] Não deve ser possivel cadastrar uma especifição para um carro não cadastrado;
-[] Não deve ser possivel cadastrar uma especificação já existente para o mesmo carro;
-[] Não deve ser possivel cadastrar uma Especificação no carro se o usuário não for admin
+[x] Não deve ser possivel cadastrar uma especifição para um carro não cadastrado;
+[x] Não deve ser possivel cadastrar uma especificação já existente para o mesmo carro;
+[x] Não deve ser possivel cadastrar uma Especificação no carro se o usuário não for admin
 
 
 # Cadastro de Imagens do Carro
