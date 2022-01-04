@@ -7,7 +7,7 @@
     "dev": "ts-node-dev -r tsconfig-paths/register --poll --inspect --transpile-only --ignore-watch node_modules --respawn src/shared/infra/http/server.ts",
     "test": "jest",
     "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli",
-    "seed:admin":"ts-node-dev src/shared/infra/typeorm/seed/admin.ts"
+    "seed:admin": "ts-node-dev src/shared/infra/typeorm/seed/admin.ts"
   },
   "keywords": [],
   "author": "",
@@ -15,6 +15,7 @@
   "dependencies": {
     "bcrypt": "^5.0.1",
     "csv-parse": "^4.16.2",
+    "dayjs": "^1.10.7",
     "express": "^4.17.1",
     "express-async-errors": "^3.1.1",
     "jsonwebtoken": "^8.5.1",
