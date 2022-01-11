@@ -1,5 +1,6 @@
 import { IDateProvider } from "@shared/container/providers/DateProvider/IDateProvider";
 import { AppError } from "@shared/errors/AppError";
+import { inject, injectable } from "tsyringe";
 
 import { Rental } from "../infra/entities/Rental";
 import { IRentalsRepository } from "../repositories/IRentalsRepository";
@@ -10,10 +11,12 @@ interface IRequest {
 
   expected_return_date: Date;
 }
-
+@injectable()
 class CreateRentalUseCase {
   constructor(
+    @inject("RentalRepository")
     private rentalsRepository: IRentalsRepository,
+    @inject("DayjsDateProvider")
     private dateProvider: IDateProvider
   ) {}
   async execute({
@@ -26,7 +29,7 @@ class CreateRentalUseCase {
     );
 
     if (carUnavailable) {
-      throw new AppError("Car is unavailable");
+      throw new AppError("Car is unvailable");
     }
     const rentalOpenToUser = await this.rentalsRepository.findOpenRentalByUser(
       user_id

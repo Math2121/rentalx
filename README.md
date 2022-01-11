@@ -62,15 +62,15 @@ ____________________________
 # Aluguel de Carro
 
 **RF**
-[] Deve ser possivel cadastrar um aluguel
+[x] Deve ser possivel cadastrar um aluguel
 
 
 
 **RN**
 
-[] O aluguel deve ter duração minima de 24 horas
-[] Não deve ser possivel cadastrar um novo aluguel caso já exista um aluguel aberto para o mesmo usuário
-[] Não deve ser possivel cadastrar um novo aluguel caso já exista um aluguel aberto para o mesmo carro
-[] O usuário deve estar logado na aplicação
-[] Ao Realizar um aluguel, o status do carro alugado deve ser alterado para indisponivel
+[x] O aluguel deve ter duração minima de 24 horas
+[x] Não deve ser possivel cadastrar um novo aluguel caso já exista um aluguel aberto para o mesmo usuário
+[x] Não deve ser possivel cadastrar um novo aluguel caso já exista um aluguel aberto para o mesmo carro
+[x] O usuário deve estar logado na aplicação
+[x] Ao Realizar um aluguel, o status do carro alugado deve ser alterado para indisponivel
 
