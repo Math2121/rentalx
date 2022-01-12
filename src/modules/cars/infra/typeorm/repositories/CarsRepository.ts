@@ -54,20 +54,20 @@ class CarsRepository implements ICarsRepository {
       .createQueryBuilder("c")
       .where("available = :available", { available: true });
 
-    if (brand) {
-      carsQuery.andWhere("brand = :brand", { brand });
+    if (brand || brand != undefined) {
+      carsQuery.andWhere("brand ILIKE  = :brand", { brand: `%${brand}%` });
     }
 
-    if (category_id) {
+    if (category_id || category_id != undefined) {
       carsQuery.andWhere("category_id = :category_id", { category_id });
     }
 
-    if (name) {
-      carsQuery.andWhere("name = :name", { name });
+    if (name || name != undefined) {
+      carsQuery.andWhere("name ILIKE = :name",  { name: `%${name}%` });
     }
 
     const cars = await carsQuery.getMany();
-    console.log(cars);
+
     return cars;
   }
 }
