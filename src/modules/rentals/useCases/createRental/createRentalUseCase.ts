@@ -1,9 +1,10 @@
+import { ICarsRepository } from "@modules/cars/repositories/ICarsRepository";
 import { IDateProvider } from "@shared/container/providers/DateProvider/IDateProvider";
 import { AppError } from "@shared/errors/AppError";
 import { inject, injectable } from "tsyringe";
 
-import { Rental } from "../infra/entities/Rental";
-import { IRentalsRepository } from "../repositories/IRentalsRepository";
+import { Rental } from "../../infra/entities/Rental";
+import { IRentalsRepository } from "../../repositories/IRentalsRepository";
 
 interface IRequest {
   user_id: string;
@@ -17,7 +18,9 @@ class CreateRentalUseCase {
     @inject("RentalsRepository")
     private rentalsRepository: IRentalsRepository,
     @inject("DayjsDateProvider")
-    private dateProvider: IDateProvider
+    private dateProvider: IDateProvider,
+    @inject("CarsRepository")
+    private carsRepository: ICarsRepository
   ) {}
   async execute({
     user_id,
@@ -54,7 +57,7 @@ class CreateRentalUseCase {
       car_id,
       expected_return_date,
     });
-
+    await this.carsRepository.updatedAvailable(car_id, false);
     return rental;
   }
 }

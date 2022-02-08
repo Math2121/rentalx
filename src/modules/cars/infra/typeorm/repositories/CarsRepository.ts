@@ -9,6 +9,7 @@ class CarsRepository implements ICarsRepository {
   constructor() {
     this.repository = getRepository(Car);
   }
+
   async findById(id: string): Promise<Car> {
     const car = await this.repository.findOne(id);
     return car;
@@ -63,12 +64,21 @@ class CarsRepository implements ICarsRepository {
     }
 
     if (name || name != undefined) {
-      carsQuery.andWhere("name ILIKE = :name",  { name: `%${name}%` });
+      carsQuery.andWhere("name ILIKE = :name", { name: `%${name}%` });
     }
 
     const cars = await carsQuery.getMany();
 
     return cars;
+  }
+  async updatedAvailable(id: string, available: boolean): Promise<void> {
+    await this.repository
+      .createQueryBuilder()
+      .update()
+      .set({ available })
+      .where("id = :id")
+      .setParameters({ id })
+      .execute();
   }
 }
 

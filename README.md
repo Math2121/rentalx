@@ -74,3 +74,17 @@ ____________________________
 [x] O usuário deve estar logado na aplicação
 [x] Ao Realizar um aluguel, o status do carro alugado deve ser alterado para indisponivel
 
+
+# Devolução de carro
+
+**RF**
+Deve ser possível realizar a devolução de um carro
+
+**RN** 
+Se o cartro for devolvido com menos de 24 horas, deverá ser cobrado diária completa
+Ao realizar a devolução, o carro deverá ser liberado para outro aluguel
+Ao relaizar a devolução, o usuário deverá ser liberado para outro Aluguel
+Ao realizar a  devolução, deverá ser calculado o total do aluguel
+Caso o horário de  devolução seja superior ao horário previsto dse entrega, deverá ser cobraado multa porporcional aos dias de atraso
+O Usuário deve estar logado na aplicação
+Caso haja multa, deverá ser somado ao total do aluguel

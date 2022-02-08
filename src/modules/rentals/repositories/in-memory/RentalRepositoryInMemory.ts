@@ -3,6 +3,7 @@ import { Rental } from "@modules/rentals/infra/entities/Rental";
 import { IRentalsRepository } from "../IRentalsRepository";
 
 class RentalRepositoryInMemory implements IRentalsRepository {
+  
   async create({
     car_id,
     user_id,
@@ -31,6 +32,9 @@ class RentalRepositoryInMemory implements IRentalsRepository {
     return this.rentals.find(
       (rental) => rental.user_id === user_id && !rental.end_date
     );
+  }
+  findById(id: string): Promise<Rental> {
+    throw new Error("Method not implemented.");
   }
 }
 
