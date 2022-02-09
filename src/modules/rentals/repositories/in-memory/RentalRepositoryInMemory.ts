@@ -3,11 +3,13 @@ import { Rental } from "@modules/rentals/infra/entities/Rental";
 import { IRentalsRepository } from "../IRentalsRepository";
 
 class RentalRepositoryInMemory implements IRentalsRepository {
-  
   async create({
     car_id,
     user_id,
     expected_return_date,
+    id,
+    end_date,
+    total
   }: ICreateRentalDTO): Promise<Rental> {
     const rental = new Rental();
 
@@ -15,6 +17,9 @@ class RentalRepositoryInMemory implements IRentalsRepository {
       car_id,
       user_id,
       expected_return_date,
+      id,
+      end_date,
+      total,
       start_date: new Date(),
     });
 
