@@ -3,6 +3,9 @@ import { Rental } from "@modules/rentals/infra/entities/Rental";
 import { IRentalsRepository } from "../IRentalsRepository";
 
 class RentalRepositoryInMemory implements IRentalsRepository {
+  findByUserId(user_id: string): Promise<Rental[]> {
+    throw new Error("Method not implemented.");
+  }
   async create({
     car_id,
     user_id,
