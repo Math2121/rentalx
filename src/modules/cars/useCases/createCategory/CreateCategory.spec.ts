@@ -7,7 +7,9 @@ describe("Create Category", () => {
   // instanciar classes necessárias para os testes
   beforeEach(() => {
     categoriesRepositoryInMemory = new CategoriesRepositoryInMemory();
-    createCategoryUseCase = new CreateCategoryUseCase(categoriesRepositoryInMemory);
+    createCategoryUseCase = new CreateCategoryUseCase(
+      categoriesRepositoryInMemory
+    );
   });
   it("Should be able to create a new category", async () => {
     const category = {
@@ -27,22 +29,21 @@ describe("Create Category", () => {
     expect(categoryExists).toHaveProperty("id");
   });
 
-  it("Should not be able to create a new category with same name",() => {
-    expect(async()=>{
-      const category = {
-        name: "Category Test",
-        description: "description test",
-      };
-  
-      await createCategoryUseCase.execute({
+  it("Should not be able to create a new category with same name", async () => {
+    const category = {
+      name: "Category Test",
+      description: "description test",
+    };
+
+    await createCategoryUseCase.execute({
+      name: category.name,
+      description: category.description,
+    });
+    await expect(
+      createCategoryUseCase.execute({
         name: category.name,
         description: category.description,
-      });
-      await createCategoryUseCase.execute({
-        name: category.name,
-        description: category.description,
-      });
-    }).rejects.toBeInstanceOf(AppError)
-   
+      })
+    ).rejects.toEqual(new AppError("Category already exists!"));
   });
 });
