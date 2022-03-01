@@ -25,9 +25,9 @@ class AuthenticatedUseCase {
   constructor(
     @inject("UserRepository")
     private usersRepository: IUserRepository,
-    @inject("UsersTokensRespository")
+    @inject("UsersTokensRepository")
     private userTokensRespository: IUsersTokenRepository,
-    @inject("DaysjsDateProvider")
+    @inject("DayjsDateProvider")
     private dayjsDateProvider: IDateProvider
   ) {}
   async execute({ email, password }: IRequest): Promise<IResponse> {
@@ -72,8 +72,9 @@ class AuthenticatedUseCase {
     //registra o token
     await this.userTokensRespository.create({
       expires_date: refresh_token_expires_date,
+      refresh_token,
       user_id: user.id,
-      refresh_token: refresh_token,
+      
     });
 
     const tokenReturn: IResponse = {
