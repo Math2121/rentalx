@@ -4,20 +4,31 @@ import { UsersRepositoryInMemory } from "@modules/accounts/repositories/in-memor
 import { CreateUserUseCase } from "../createUser/CreateUserUseCase";
 import { AuthenticatedUseCase } from "./authenticatedUseCase";
 import { UsersTokensRepository } from "@modules/accounts/infra/typeorm/repositories/UsersTokensRepository";
+import { UsersTokensRepositoryInMemory } from "@modules/accounts/repositories/in-memory/UsersTokensRepositoryInMemory";
+import { DayjsDateProvider } from "@shared/container/providers/DateProvider/implementations/DayjsDateProvider";
 
 let authenticateUserUseCase: AuthenticatedUseCase;
 let usersTokensRespository: UsersTokensRepository;
 let userRepositoryInMemory: UsersRepositoryInMemory;
 let createUserUseCase: CreateUserUseCase;
+let usersTokensRepositoryInMemory: UsersTokensRepositoryInMemory;
+let dateProvider: DayjsDateProvider;
 describe("Authenticate User", () => {
   beforeEach(() => {
+    dateProvider = new DayjsDateProvider();
+    usersTokensRepositoryInMemory = new UsersTokensRepositoryInMemory();
     userRepositoryInMemory = new UsersRepositoryInMemory();
-    usersTokensRespository = new UsersTokensRepository()
-    authenticateUserUseCase = new AuthenticatedUseCase(userRepositoryInMemory,usersTokensRespository);
+    
+    authenticateUserUseCase = new AuthenticatedUseCase(
+      userRepositoryInMemory,
+      usersTokensRepositoryInMemory,
+      dateProvider
+    );
+
     createUserUseCase = new CreateUserUseCase(userRepositoryInMemory);
   });
 
-  it("should be able create an toker", async () => {
+  it("should be able create an token", async () => {
     const user: ICreateUserDTO = {
       driver_license: "000554",
       email: "math@21gmail.com",
@@ -33,7 +44,7 @@ describe("Authenticate User", () => {
     expect(result).toHaveProperty("token");
   });
 
-  it("should not be able to athenticate an nonexistent user", async () => {
+  it("should not be able to authenticate an nonexistent user", async () => {
     await expect(
       authenticateUserUseCase.execute({
         email: "false@gmail.com",
@@ -51,7 +62,7 @@ describe("Authenticate User", () => {
     };
 
     await userRepositoryInMemory.create(user);
-  
+
     await expect(
       authenticateUserUseCase.execute({
         email: user.email,
