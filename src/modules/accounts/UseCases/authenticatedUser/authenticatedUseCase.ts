@@ -58,7 +58,7 @@ class AuthenticatedUseCase {
       expiresIn: expires_in_token,
     });
 
-    //Cria o refres Token
+    //Cria o refresh Token
     const refresh_token = sign({ email }, secret_refresh_token, {
       subject: user.id,
       expiresIn: expires_in_refersh_token,

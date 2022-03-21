@@ -15,7 +15,7 @@ export async function ensureAuthenticate(
 ) {
   //retorna o token no header da requisição
   const authHeader = request.headers.authorization;
-  const userTokensRepository = new UsersTokensRepository()
+
   if (!authHeader) {
     throw new AppError("Token missing", 401);
   }
@@ -26,13 +26,10 @@ export async function ensureAuthenticate(
     // verifica se o token e válido
     const { sub: user_id } = verify(
       token,
-      auth.secret_refresh_token
+      auth.secret
     ) as IPayload;
     //Verifica se o usuário e válido
-    const user = await userTokensRepository.findByUserIdAndRefershToken(user_id,token);
-    if (!user) {
-      throw new AppError("User does not exists!", 401);
-    }
+
     request.user = { id: user_id };
     next();
   } catch (error) {
